@@ -5,7 +5,7 @@ from durguestprofile import properties_score
 # Replace with your FTP server details
 ftp_server = '82.147.196.78'
 ftp_user = 'opera'
-ftp_password = 'OpConn@2023#'
+ftp_password = ''
 remote_directory = '/Opera/Guest_Data'
 files_path = fr'C:\Users\muham\Desktop\Dur\data'  # Where you want to save the downloaded files
 
