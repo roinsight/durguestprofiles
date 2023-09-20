@@ -122,7 +122,7 @@ def match_adddress(country_cd, adr_state, adr_city, adr_zip_code, adr_street_nam
 
 def validate_address(address):
     if not isnan(address):
-        if address.lower().__contains__('xx'):
+        if str(address).lower().__contains__('xx'):
             return True
         else:
             return False
@@ -326,7 +326,8 @@ def parse_clean_file(file):
     # Update dates
     for col in dframe.columns:
         if col.lower().endswith('date'):
-            dframe[col] = pd.to_datetime(dframe[col], format='mixed')
+            # dframe[col] = pd.to_datetime(dframe[col], format='mixed')
+            dframe[col] = dframe[col]
 
 
     return dframe
@@ -354,6 +355,7 @@ def final_scoring(dframe, criteria_file=None):
         "adr_zip_code": 4,
         "telephone_type": 2,
     }
+    criteria_grouping = {}
     # define the audit criteria and their weights
     if criteria_file is None:
         criteria = criteria_main
@@ -434,11 +436,12 @@ def properties_score(files_folder=None,  criteria_file=None):
     # get the last dates
     _dates_list = [''.join(re.findall(r'[\d]+', os.path.basename(i))) for i in files_list]
     dates_list = []
+    date_format = '%d%m%Y%H%M%S%f'
     for indx, i in enumerate(_dates_list):
         try:
-            dates_list.append(dt.datetime.strptime(i, '%d%m%y'))
+            dates_list.append(dt.datetime.strptime(i, date_format).date())
         except Exception as ex:
-            dates_list.append(dt.datetime.strptime('010123', '%d%m%y'))
+            dates_list.append(dt.datetime.strptime('0409202349147661', date_format).date())
             print(F'The following file does not contains datetime stamp {files_list[indx]}')
 
     # dates_list = [dt.datetime.strptime(i, '%d%m%y') for i in _dates_list]

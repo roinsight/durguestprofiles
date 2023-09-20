@@ -12,7 +12,7 @@ def read(fname):
     return contents
 
 
-VERSION = '1.1.8'
+VERSION = '2.0.2'
 DESCRIPTION = 'Dur Guest Data Accuracy Measurement Tool'
 LONG_DESCRIPTION = read("README.md")
 
@@ -41,7 +41,8 @@ setup(
         "scipy>=1.10.0",
         "matplotlib==3.7.1",
         "google-i18n-address==2.5.2",
-        "phonenumbers==8.13.8"
+        "phonenumbers==8.13.8",
+        "pysftp==0.2.9"
 
         # add any additional packages
     ],
